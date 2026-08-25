@@ -9,6 +9,8 @@ export default function SlotStep({
   onSelect,
   onBack,
   date,
+  academyMode = false,
+  academyLoading = false,
 }) {
   const [sessions, setSessions] = useState([]);
   const [loading, setLoading] =
@@ -74,14 +76,36 @@ export default function SlotStep({
         </div>
 
         <h2 className="mt-4 text-[30px] font-black text-[var(--navy)] sm:text-[38px]">
-          Select Your Stadium Session
+          {academyMode
+            ? "Reserve a Stadium Session"
+            : "Select Your Stadium Session"}
         </h2>
 
         <p className="mt-3 text-[16px] text-[#697381]">
-          Choose one available stadium session
-          for {formatDate(date)}.
+          {academyMode
+            ? `Choose a session to reserve for academy practice on ${formatDate(
+                date
+              )}.`
+            : `Choose one available stadium session for ${formatDate(
+                date
+              )}.`}
         </p>
       </div>
+
+      {/* Academy mode notice */}
+      {academyMode && (
+        <div className="mb-7 border border-[#e4d27a] bg-[#fff9df] px-5 py-4">
+          <div className="text-[11px] font-black tracking-[0.12em] text-[var(--navy)]">
+            ACADEMY STAFF MODE
+          </div>
+
+          <p className="mt-1 text-[14px] leading-6 text-[#697381]">
+            Select an available session to reserve
+            it for academy practice. No customer
+            payment is required.
+          </p>
+        </div>
+      )}
 
       {/* Loading */}
       {loading && (
@@ -96,6 +120,21 @@ export default function SlotStep({
           </p>
         </div>
       )}
+
+      {/* Reservation loading */}
+      {!loading &&
+        academyLoading && (
+          <div className="mb-6 border border-[#dfe2e7] bg-white px-5 py-4">
+            <div className="text-[11px] font-black tracking-[0.1em] text-[var(--navy)]">
+              RESERVING SESSION...
+            </div>
+
+            <p className="mt-1 text-[14px] text-[#697381]">
+              Creating the internal academy
+              reservation.
+            </p>
+          </div>
+        )}
 
       {/* Error */}
       {!loading && error && (
@@ -134,13 +173,23 @@ export default function SlotStep({
                 selectedSlot?.id ===
                 session.id;
 
+              const academyBlocked =
+                session.reason ===
+                "ACADEMY_BLOCKED";
+
+              const buttonDisabled =
+                unavailable ||
+                academyLoading;
+
               return (
                 <button
                   key={session.id}
                   type="button"
-                  disabled={unavailable}
+                  disabled={buttonDisabled}
                   onClick={() => {
-                    if (!unavailable) {
+                    if (
+                      !buttonDisabled
+                    ) {
                       onSelect(session);
                     }
                   }}
@@ -152,9 +201,10 @@ export default function SlotStep({
                         : "border-[#dfe2e7] bg-white text-[var(--navy)] hover:border-[var(--gold)]"
                   }`}
                 >
-                  <div className="flex items-center justify-between">
+                  {/* Header */}
+                  <div className="flex items-center justify-between gap-3">
                     <div
-                      className={`flex h-11 w-11 items-center justify-center ${
+                      className={`flex h-11 w-11 shrink-0 items-center justify-center ${
                         unavailable
                           ? "bg-[#dedfe1]"
                           : "bg-[var(--gold)]"
@@ -173,18 +223,25 @@ export default function SlotStep({
                     <span
                       className={`px-3 py-2 text-[10px] font-black tracking-[0.1em] ${
                         unavailable
-                          ? "bg-[#dedfe1] text-[#6f747b]"
+                          ? academyBlocked
+                            ? "bg-[#e4dcb5] text-[#6f6434]"
+                            : "bg-[#dedfe1] text-[#6f747b]"
                           : selected
                             ? "bg-[var(--navy)] text-white"
-                            : "bg-[var(--gold)] text-[var(--navy-dark)]"
+                            : academyMode
+                              ? "bg-[var(--gold)] text-[var(--navy-dark)]"
+                              : "bg-[var(--gold)] text-[var(--navy-dark)]"
                       }`}
                     >
-                      {getStatusLabel(
-                        session
-                      )}
+                      {getStatusLabel({
+                        session,
+                        academyMode,
+                        academyLoading,
+                      })}
                     </span>
                   </div>
 
+                  {/* Session */}
                   <div className="mt-7">
                     <div className="text-[26px] font-black uppercase">
                       {session.label}
@@ -201,6 +258,7 @@ export default function SlotStep({
                     </div>
                   </div>
 
+                  {/* Price */}
                   <div
                     className={`mt-6 border-t pt-5 ${
                       selected
@@ -222,13 +280,38 @@ export default function SlotStep({
                     </div>
                   </div>
 
-                  {session.reason ===
-                    "ACADEMY_BLOCKED" && (
+                  {/* Academy action hint */}
+                  {!unavailable &&
+                    academyMode && (
+                      <div
+                        className={`mt-5 border-t pt-4 text-[11px] font-black tracking-[0.08em] ${
+                          selected
+                            ? "border-[var(--navy)]/15 text-[var(--navy)]"
+                            : "border-[#e5e7ea] text-[var(--gold-dark)]"
+                        }`}
+                      >
+                        {academyLoading
+                          ? "CREATING RESERVATION..."
+                          : "CLICK TO RESERVE FOR ACADEMY"}
+                      </div>
+                    )}
+
+                  {/* Academy blocked message */}
+                  {academyBlocked && (
                     <div className="mt-5 border-t border-[#d7d9dc] pt-4 text-[11px] font-black tracking-[0.08em] text-[#686e76]">
                       THIS SESSION HAS BEEN
                       RESERVED BY THE ACADEMY.
                     </div>
                   )}
+
+                  {/* Customer booked message */}
+                  {unavailable &&
+                    !academyBlocked && (
+                      <div className="mt-5 border-t border-[#d7d9dc] pt-4 text-[11px] font-black tracking-[0.08em] text-[#686e76]">
+                        THIS SESSION IS ALREADY
+                        BOOKED.
+                      </div>
+                    )}
                 </button>
               );
             })}
@@ -250,10 +333,12 @@ export default function SlotStep({
           </div>
         )}
 
+      {/* Back */}
       <button
         type="button"
         onClick={onBack}
-        className="mt-7 text-[12px] font-black tracking-[0.12em] text-[var(--navy)]"
+        disabled={academyLoading}
+        className="mt-7 text-[12px] font-black tracking-[0.12em] text-[var(--navy)] disabled:cursor-not-allowed disabled:opacity-50"
       >
         ← BACK TO DATE
       </button>
@@ -261,13 +346,26 @@ export default function SlotStep({
   );
 }
 
-function getStatusLabel(session) {
-  if (session.reason === "ACADEMY_BLOCKED") {
+function getStatusLabel({
+  session,
+  academyMode,
+  academyLoading,
+}) {
+  if (
+    session.reason ===
+    "ACADEMY_BLOCKED"
+  ) {
     return "ACADEMY BOOKED";
   }
 
   if (!session.available) {
     return "BOOKED";
+  }
+
+  if (academyMode) {
+    return academyLoading
+      ? "RESERVING..."
+      : "RESERVE";
   }
 
   return "AVAILABLE";
@@ -286,8 +384,17 @@ function formatTime(time) {
   const hours =
     Number(hoursString);
 
+  if (
+    Number.isNaN(hours) ||
+    !minutes
+  ) {
+    return time;
+  }
+
   const suffix =
-    hours >= 12 ? "PM" : "AM";
+    hours >= 12
+      ? "PM"
+      : "AM";
 
   const displayHour =
     hours % 12 || 12;
