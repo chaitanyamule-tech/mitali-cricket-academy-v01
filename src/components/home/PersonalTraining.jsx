@@ -99,7 +99,7 @@ export default function PersonalTraining() {
             <div className="relative overflow-hidden">
               <div className="aspect-[1.12/1] sm:aspect-[1.2/1]">
                 <img
-                  src="/images/personal.png"
+                  src="/images/coaches/nandusir1.jpeg"
                   alt="One-to-one cricket training"
                   className="h-full w-full object-cover"
                 />
@@ -109,11 +109,11 @@ export default function PersonalTraining() {
               <div className="absolute inset-0 bg-black/10" />
 
               {/* Label */}
-              <div className="absolute right-5 top-5 bg-[var(--gold)] px-5 py-3.5 sm:right-7 sm:top-7 sm:px-6 sm:py-4">
+              {/* <div className="absolute right-5 top-5 bg-[var(--gold)] px-5 py-3.5 sm:right-7 sm:top-7 sm:px-6 sm:py-4">
                 <span className="text-[12px] font-black tracking-[0.12em] text-[var(--navy-dark)] sm:text-[13px]">
                   1-ON-1 COACHING
                 </span>
-              </div>
+              </div> */}
             </div>
           </motion.div>
         </div>
