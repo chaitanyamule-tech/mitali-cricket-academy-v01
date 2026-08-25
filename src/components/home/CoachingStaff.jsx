@@ -9,7 +9,7 @@ const coaches = [
   {
     name: "Dr. Nandkishor Tulashiram Kushnure",
     cardName: "Dr. NandKishor Kushnure Sir",
-    designation: "HEAD COACH",
+    designation: "FOUNDER & HEAD COACH",
     role: "Batting & Performance",
     image: "/images/coaches/nandusir1.jpeg",
     experience: "12+ YEARS EXPERIENCE",
