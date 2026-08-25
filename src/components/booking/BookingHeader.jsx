@@ -4,78 +4,107 @@ import { useState } from "react";
 import Link from "next/link";
 import AcademyStaffAccess from "@/components/booking/AcademyStaffAccess";
 
+
+
 export default function BookingHeader({
   academyMode = false,
   onAcademyLogin,
   onAcademyLogout,
 }) {
-  const [showAcademyAccess, setShowAcademyAccess] =
-    useState(false);
+  const [showAcademyAccess, setShowAcademyAccess] = useState(false);
 
   return (
     <>
-      <header className="border-b border-white/10 bg-[var(--navy)]">
-        <div className="mx-auto flex min-h-[88px] max-w-[1400px] items-center justify-between px-5 sm:px-8 lg:px-10">
-
+      <header className="w-full overflow-hidden border-b border-white/10 bg-[var(--navy)]">
+        <div className="mx-auto flex min-h-[88px] w-full max-w-[1400px] items-center justify-between gap-2 overflow-hidden px-3 sm:px-6 lg:px-10">
+          
           {/* Logo + Academy Name */}
           <Link
-            href="/"
-            className="flex items-center gap-4"
+            href="/images/logo.png"
+            className="flex min-w-0 shrink items-center gap-2 sm:gap-4"
           >
-            <div className="flex h-12 w-12 items-center justify-center bg-[var(--gold)]">
-              <div className="flex h-7 w-7 items-center justify-center rounded-full border-2 border-[var(--navy)]">
-                <span className="text-xs font-black text-[var(--navy)]">
-                  ♢
-                </span>
-              </div>
+            <div className="flex h-10 w-10 shrink-0 items-center justify-center bg-[var(--gold)] sm:h-12 sm:w-12">
+              <img
+                src="/images/logo.png"
+                alt="Mitali Cricket Academy Logo" 
+              />
             </div>
 
-            <div>
-              <div className="text-[17px] font-black text-white sm:text-[19px]">
-                Mitali CRICKET ACADEMY
+            <div className="min-w-0">
+              <div className="truncate text-[14px] font-black leading-tight text-white sm:text-[19px]">
+                <span className="sm:hidden">
+                  Mitali
+                  <br />
+                  CRICKET ACADEMY
+                </span>
+
+                <span className="hidden sm:inline">
+                  Mitali CRICKET ACADEMY
+                </span>
               </div>
 
-              <div className="mt-1 text-[9px] font-bold tracking-[0.16em] text-[var(--gold)]">
+              <div className="mt-1 text-[8px] font-bold tracking-[0.14em] text-[var(--gold)] sm:text-[9px] sm:tracking-[0.16em]">
                 STADIUM BOOKING
               </div>
             </div>
           </Link>
 
           {/* Right Side */}
-          <div className="flex items-center gap-5">
-
+          <div className="flex shrink-0 items-center gap-1.5 sm:gap-4 lg:gap-5">
             {academyMode ? (
               <>
-                <div className="bg-[var(--gold)] px-3 py-2 text-[10px] font-black tracking-[0.1em] text-[var(--navy-dark)]">
-                  ACADEMY MODE ACTIVE
-                </div>
+                {/* Academy Mode */}
+                {/* <div className="shrink-0 bg-[var(--gold)] px-2 py-2 text-center text-[8px] font-black leading-[1.15] tracking-[0.08em] text-[var(--navy-dark)] sm:px-3 sm:py-2 sm:text-[10px] sm:tracking-[0.1em]">
+                  <span className="sm:hidden">
+                    ACADEMY
+                    <br />
+                    MODE
+                    <br />
+                    ACTIVE
+                  </span>
 
+                  <span className="hidden sm:inline">
+                    ACADEMY MODE ACTIVE
+                  </span>
+                </div> */}
+
+                {/* Exit Staff */}
                 <button
                   type="button"
                   onClick={onAcademyLogout}
-                  className="text-[10px] font-black tracking-[0.12em] text-white/70 transition-colors hover:text-[var(--gold)]"
+                  className="shrink-0 whitespace-nowrap px-1 text-[9px] font-black tracking-[0.08em] text-white/70 transition-colors hover:text-[var(--gold)] sm:px-2 sm:text-[10px] sm:tracking-[0.12em]"
                 >
-                  EXIT STAFF MODE
+                  <span className="sm:hidden">EXIT</span>
+                  <span className="hidden sm:inline">
+                    EXIT STAFF MODE
+                  </span>
                 </button>
               </>
             ) : (
               <button
                 type="button"
-                onClick={() =>
-                  setShowAcademyAccess(true)
-                }
-                className="text-[10px] font-black tracking-[0.12em] text-white/50 transition-colors hover:text-[var(--gold)]"
+                onClick={() => setShowAcademyAccess(true)}
+                className="shrink-0 whitespace-nowrap px-1 text-[9px] font-black tracking-[0.08em] text-white/60 transition-colors hover:text-[var(--gold)] sm:px-2 sm:text-[10px] sm:tracking-[0.12em]"
               >
-                ACADEMY STAFF
+                <span className="sm:hidden">STAFF</span>
+                <span className="hidden sm:inline">
+                  ACADEMY STAFF
+                </span>
               </button>
             )}
 
             {/* Back to Website */}
             <Link
               href="/"
-              className="text-[12px] font-black tracking-[0.12em] text-white/75 transition-colors hover:text-[var(--gold)]"
+              className="flex shrink-0 items-center justify-center bg-[var(--gold)] px-2.5 py-2.5 text-[9px] font-black leading-[1.1] tracking-[0.06em] text-[var(--navy)] transition-colors hover:bg-[var(--gold-dark)] sm:bg-transparent sm:px-2 sm:py-2 sm:text-[12px] sm:tracking-[0.12em] sm:text-white/75"
             >
-              ← BACK TO WEBSITE
+              <span className="sm:hidden">
+                ← BACK
+              </span>
+
+              <span className="hidden sm:inline">
+                ← BACK TO WEBSITE
+              </span>
             </Link>
           </div>
         </div>
@@ -84,9 +113,7 @@ export default function BookingHeader({
       {/* Academy Staff Login Modal */}
       {showAcademyAccess && (
         <AcademyStaffAccess
-          onClose={() =>
-            setShowAcademyAccess(false)
-          }
+          onClose={() => setShowAcademyAccess(false)}
           onSuccess={(token) => {
             setShowAcademyAccess(false);
 

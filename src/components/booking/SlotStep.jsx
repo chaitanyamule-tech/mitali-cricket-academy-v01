@@ -101,8 +101,7 @@ export default function SlotStep({
 
           <p className="mt-1 text-[14px] leading-6 text-[#697381]">
             Select an available session to reserve
-            it for academy practice. No customer
-            payment is required.
+            it for stadium practice. 
           </p>
         </div>
       )}
