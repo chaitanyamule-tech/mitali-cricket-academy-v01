@@ -190,7 +190,7 @@ const handleSubmit = async (event) => {
                 text="Mitalicricketacademy@2019gmail.com"
               />
 
-              <ContactItem
+              <ContactItem 
                 icon={Clock3}
                 title="OPENING HOURS"
                 text="06:00 AM – 10:00 PM"
@@ -324,9 +324,14 @@ const handleSubmit = async (event) => {
   );
 }
 
-function ContactItem({ icon: Icon, title, text }) {
+function ContactItem({
+  icon: Icon,
+  title,
+  text,
+}) {
   return (
-    <div className="flex items-start gap-4">
+    <div className="flex w-full min-w-0 items-start gap-4">
+      {/* Icon */}
       <div className="flex h-11 w-11 shrink-0 items-center justify-center bg-[var(--gold)]">
         <Icon
           size={19}
@@ -335,19 +340,25 @@ function ContactItem({ icon: Icon, title, text }) {
         />
       </div>
 
-      <div>
+      {/* Content */}
+      <div className="min-w-0 flex-1">
         <div className="text-[10px] font-black tracking-[0.16em] text-[var(--gold)]">
           {title}
         </div>
 
-        <div className="mt-1 text-[15px] leading-6 text-white/85">
+        <div
+          className="mt-1 text-[15px] leading-6 text-white/85"
+          style={{
+            overflowWrap: "anywhere",
+            wordBreak: "break-word",
+          }}
+        >
           {text}
         </div>
       </div>
     </div>
   );
 }
-
 function FormField({
   label,
   name,

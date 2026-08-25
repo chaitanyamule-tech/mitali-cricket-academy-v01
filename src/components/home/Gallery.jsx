@@ -1,8 +1,19 @@
 "use client";
 
-import { useMemo, useState } from "react";
-import { motion, AnimatePresence } from "motion/react";
-import { X, Maximize2 } from "lucide-react";
+import {
+  useEffect,
+  useMemo,
+  useRef,
+  useState,
+} from "react";
+import {
+  motion,
+  AnimatePresence,
+} from "motion/react";
+import {
+  X,
+  Maximize2,
+} from "lucide-react";
 
 const filters = [
   "ALL",
@@ -46,7 +57,7 @@ const galleryItems = [
   },
   {
     id: 6,
-    category: "Staff",
+    category: "STAFF",
     image: "/images/gallery/Coach.jpeg",
     title: "Academy Staff",
   },
@@ -70,14 +81,27 @@ const galleryItems = [
   },
 ];
 
-function GalleryImage({ item, index, onClick }) {
+function GalleryImage({
+  item,
+  index,
+  onClick,
+}) {
   return (
     <motion.button
       type="button"
       layout
-      initial={{ opacity: 0, y: 20 }}
-      animate={{ opacity: 1, y: 0 }}
-      exit={{ opacity: 0, y: -10 }}
+      initial={{
+        opacity: 0,
+        y: 20,
+      }}
+      animate={{
+        opacity: 1,
+        y: 0,
+      }}
+      exit={{
+        opacity: 0,
+        y: -10,
+      }}
       transition={{
         duration: 0.35,
         delay: index * 0.04,
@@ -125,31 +149,74 @@ function GalleryImage({ item, index, onClick }) {
 }
 
 export default function Gallery() {
-  const [activeFilter, setActiveFilter] = useState("ALL");
-  const [selectedImage, setSelectedImage] = useState(null);
+  const [activeFilter, setActiveFilter] =
+    useState("ALL");
 
-  const filteredItems = useMemo(() => {
-    if (activeFilter === "ALL") {
-      return galleryItems;
+  const [selectedImage, setSelectedImage] =
+    useState(null);
+
+  const filtersRef =
+    useRef(null);
+
+  /*
+   * Always start the filter bar
+   * from the left-most position.
+   */
+  useEffect(() => {
+    if (filtersRef.current) {
+      filtersRef.current.scrollLeft = 0;
     }
+  }, []);
 
-    return galleryItems.filter(
-      (item) => item.category === activeFilter
-    );
+  /*
+   * Also reset the filter bar whenever
+   * the gallery is revisited or filter
+   * state is changed.
+   */
+  useEffect(() => {
+    if (filtersRef.current) {
+      filtersRef.current.scrollTo({
+        left: 0,
+        behavior: "auto",
+      });
+    }
   }, [activeFilter]);
+
+  const filteredItems =
+    useMemo(() => {
+      if (activeFilter === "ALL") {
+        return galleryItems;
+      }
+
+      return galleryItems.filter(
+        (item) =>
+          item.category === activeFilter
+      );
+    }, [activeFilter]);
 
   return (
     <section
-  id="gallery"
-  className="bg-[#f6f7f9]"
->
-      <div className="container-academy py-24 sm:py-28 lg:py-32">
+      id="gallery"
+      className="w-full bg-[#f6f7f9]"
+    >
+      <div className="container-academy w-full max-w-full py-24 sm:py-28 lg:py-32">
         {/* Section heading */}
         <motion.div
-          initial={{ opacity: 0, y: 25 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, amount: 0.2 }}
-          transition={{ duration: 0.6 }}
+          initial={{
+            opacity: 0,
+            y: 25,
+          }}
+          whileInView={{
+            opacity: 1,
+            y: 0,
+          }}
+          viewport={{
+            once: true,
+            amount: 0.2,
+          }}
+          transition={{
+            duration: 0.6,
+          }}
           className="mx-auto max-w-[850px] text-center"
         >
           <div className="gold-label">
@@ -163,49 +230,64 @@ export default function Gallery() {
           </h2>
 
           <p className="mx-auto mt-7 max-w-[760px] text-[17px] leading-[1.75] text-[#5d6775] sm:text-[18px]">
-            Take a look at training sessions, matches, facilities and the
-            moments that make our academy special.
+            Take a look at training sessions,
+            matches, facilities and the moments
+            that make our academy special.
           </p>
         </motion.div>
 
         {/* Filters */}
-        <div className="mt-11 flex justify-center overflow-x-auto pb-2">
-          <div className="flex min-w-max border border-[#dfe2e7] bg-white p-1.5">
-            {filters.map((filter) => {
-              const active = filter === activeFilter;
+        <div className="mt-11 w-full max-w-full">
+          <div
+            ref={filtersRef}
+            className="gallery-filters-scroll w-full max-w-full overflow-x-auto"
+          >
+            <div className="flex w-max min-w-full items-center justify-start border border-[#dfe2e7] bg-white p-1.5">
+              {filters.map((filter) => {
+                const active =
+                  filter === activeFilter;
 
-              return (
-                <button
-                  key={filter}
-                  type="button"
-                  onClick={() => setActiveFilter(filter)}
-                  className={`px-4 py-3 text-[11px] font-black tracking-[0.1em] transition-all duration-200 sm:px-5 sm:text-[12px] ${
-                    active
-                      ? "bg-[var(--navy)] text-white"
-                      : "text-[#66717e] hover:text-[var(--navy)]"
-                  }`}
-                >
-                  {filter}
-                </button>
-              );
-            })}
+                return (
+                  <button
+                    key={filter}
+                    type="button"
+                    onClick={() =>
+                      setActiveFilter(
+                        filter
+                      )
+                    }
+                    className={`shrink-0 px-4 py-3 text-[11px] font-black tracking-[0.1em] transition-all duration-200 sm:px-5 sm:text-[12px] ${
+                      active
+                        ? "bg-[var(--navy)] text-white"
+                        : "text-[#66717e] hover:text-[var(--navy)]"
+                    }`}
+                  >
+                    {filter}
+                  </button>
+                );
+              })}
+            </div>
           </div>
         </div>
 
         {/* Gallery */}
         <motion.div
           layout
-          className="mt-12 grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3"
+          className="mt-12 grid w-full grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3"
         >
           <AnimatePresence mode="popLayout">
-            {filteredItems.map((item, index) => (
-              <GalleryImage
-                key={item.id}
-                item={item}
-                index={index}
-                onClick={setSelectedImage}
-              />
-            ))}
+            {filteredItems.map(
+              (item, index) => (
+                <GalleryImage
+                  key={item.id}
+                  item={item}
+                  index={index}
+                  onClick={
+                    setSelectedImage
+                  }
+                />
+              )
+            )}
           </AnimatePresence>
         </motion.div>
       </div>
@@ -214,40 +296,71 @@ export default function Gallery() {
       <AnimatePresence>
         {selectedImage && (
           <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
+            initial={{
+              opacity: 0,
+            }}
+            animate={{
+              opacity: 1,
+            }}
+            exit={{
+              opacity: 0,
+            }}
             className="fixed inset-0 z-[100] flex items-center justify-center bg-[rgba(5,16,30,0.93)] p-5 sm:p-8"
-            onClick={() => setSelectedImage(null)}
+            onClick={() =>
+              setSelectedImage(null)
+            }
           >
             <motion.div
-              initial={{ opacity: 0, scale: 0.96 }}
-              animate={{ opacity: 1, scale: 1 }}
-              exit={{ opacity: 0, scale: 0.96 }}
-              transition={{ duration: 0.25 }}
+              initial={{
+                opacity: 0,
+                scale: 0.96,
+              }}
+              animate={{
+                opacity: 1,
+                scale: 1,
+              }}
+              exit={{
+                opacity: 0,
+                scale: 0.96,
+              }}
+              transition={{
+                duration: 0.25,
+              }}
               className="relative max-h-[90vh] max-w-[1100px]"
-              onClick={(event) => event.stopPropagation()}
+              onClick={(event) =>
+                event.stopPropagation()
+              }
             >
               <img
-                src={selectedImage.image}
-                alt={selectedImage.title}
+                src={
+                  selectedImage.image
+                }
+                alt={
+                  selectedImage.title
+                }
                 className="max-h-[85vh] w-auto max-w-full object-contain"
               />
 
-              <div className="absolute bottom-0 inset-x-0 bg-[rgba(7,27,54,0.88)] px-5 py-4">
+              <div className="absolute inset-x-0 bottom-0 bg-[rgba(7,27,54,0.88)] px-5 py-4">
                 <div className="text-[11px] font-black tracking-[0.12em] text-[var(--gold)]">
-                  {selectedImage.category}
+                  {
+                    selectedImage.category
+                  }
                 </div>
 
                 <div className="mt-1 text-[16px] font-bold text-white">
-                  {selectedImage.title}
+                  {
+                    selectedImage.title
+                  }
                 </div>
               </div>
 
               <button
                 type="button"
                 aria-label="Close gallery image"
-                onClick={() => setSelectedImage(null)}
+                onClick={() =>
+                  setSelectedImage(null)
+                }
                 className="absolute right-3 top-3 flex h-11 w-11 items-center justify-center bg-[var(--gold)]"
               >
                 <X

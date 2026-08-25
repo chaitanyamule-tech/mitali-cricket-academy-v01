@@ -78,3 +78,12 @@ button {
   letter-spacing: 0.22em;
   text-transform: uppercase;
 }
+
+.gallery-filters-scroll {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.gallery-filters-scroll::-webkit-scrollbar {
+  display: none;
+}
