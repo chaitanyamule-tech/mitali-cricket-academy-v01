@@ -52,32 +52,61 @@ const branches = [
     ],
   },
 
-  {
-    number: "02",
-    name: "Mitali Cricket Academy Stadium",
-    address:
-      "Malku Dhanora, Nanded, Maharashtra, India",
+  // {
+  //   number: "02",
+  //   name: "Mitali Cricket Academy Stadium",
+  //   address:
+  //     "Malku Dhanora, Nanded, Maharashtra, India",
 
-    phone:"7972082528 , 7385561208",
+  //   phone:"7972082528 , 7385561208",
 
-    hours: "07:00 AM – 11:00 PM",
+  //   hours: "07:00 AM – 11:00 PM",
 
-    mapEmbed:
-      "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d4052.5740011099274!2d77.20518377551363!3d19.194735282034422!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bd1d52dd238ecf9%3A0x41dd328587b9e067!2sMitali%20Cricket%20Academy%20Ground!5e1!3m2!1sen!2sin!4v1787479520912!5m2!1sen!2sin",
+  //   mapEmbed:
+  //     "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d32420.590434861373!2d77.16964244842528!3d19.19474327237146!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bd1d52dd238ecf9%3A0x41dd328587b9e067!2sMitali%20Cricket%20Academy%20Ground!5e1!3m2!1sen!2sin!4v1794108796918!5m2!1sen!2sin",
 
-    mapUrl:
-      "https://maps.app.goo.gl/KpfsrK7hZknnjbqv6",
+  //   mapUrl:
+  //     "https://maps.app.goo.gl/FG1RXc3N77zTyKFC9",
 
-    bookingUrl: "/booking",
+  //   bookingUrl: "/booking",
 
-    features: [
-      "Professional Ground",
-      "Practice Nets",
-      "Bowling Machines",
-      "Floodlights",
-      "Fitness Area",
-    ],
-  },
+  //   features: [
+  //     "Professional Ground",
+  //     "Practice Nets",
+  //     "Bowling Machines",
+  //     "Floodlights",
+  //     "Fitness Area",
+  //   ],
+  // },
+  
+{
+  number: "02",
+  name: "Mitali Cricket Academy Stadium",
+  address: "Malku Dhanora, Nanded, Maharashtra, India",
+
+  phone: "7972082528, 7385561208",
+
+  hours: "07:00 AM – 11:00 PM",
+
+  mapEmbed:
+    "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d32420.590434861373!2d77.16964244842528!3d19.19474327237146!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bd1d52dd238ecf9%3A0x41dd328587b9e067!2sMitali%20Cricket%20Academy%20Ground!5e1!3m2!1sen!2sin!4v1794109032682!5m2!1sen!2sin",
+
+  // mapUrl: "https://maps.app.goo.gl/FG1RXc3N77zTyKFC9",
+
+ mapUrl:
+  "https://www.google.com/maps/search/?api=1&query=Mitali%20Cricket%20Academy%20Ground%2C%20Malku%20Dhanora%2C%20Nanded",
+
+  bookingUrl: "/booking",
+
+  features: [
+    "Professional Ground",
+    "Practice Nets",
+    "Bowling Machines",
+    "Floodlights",
+    "Fitness Area",
+  ],
+},
+
 ];
 
 function BranchCard({ branch, index }) {
@@ -94,14 +123,24 @@ function BranchCard({ branch, index }) {
     >
       {/* MAP */}
       <div className="relative h-[235px] overflow-hidden bg-[#e5e7ea]">
-        <iframe
+        {/* <iframe
           src={branch.mapEmbed}
           title={`${branch.name} location`}
           className="absolute inset-0 h-full w-full border-0"
           loading="lazy"
           allowFullScreen
           referrerPolicy="no-referrer-when-downgrade"
-        />
+        /> */}
+        
+<iframe
+  src={branch.mapEmbed}
+  title={`${branch.name} location`}
+  className="absolute inset-0 h-full w-full border-0"
+  loading="lazy"
+  allowFullScreen
+  referrerPolicy="strict-origin-when-cross-origin"
+/>
+
 
          
 
