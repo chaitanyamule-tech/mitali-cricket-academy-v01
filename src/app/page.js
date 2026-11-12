@@ -1,41 +1,33 @@
+
 import Navbar from "@/components/layout/Navbar";
 import Hero from "@/components/home/Hero";
-import AboutSection from "@/components/home/AboutSection";
-import TrainingPrograms from "@/components/home/TrainingPrograms";
-import PersonalTraining from "@/components/home/PersonalTraining";
-import CoachingStaff from "@/components/home/CoachingStaff";
-import Facilities from "@/components/home/Facilities";
+import BusinessSwitcher from "@/components/home/BusinessSwitcher";
 import Gallery from "@/components/home/Gallery";
 import Testimonials from "@/components/home/Testimonials";
-import Branches from "@/components/home/Branches";
 import EnquirySection from "@/components/home/EnquirySection";
+
 import Footer from "@/components/layout/Footer";
 
 export default function Home() {
   return (
     <main>
+      {/* Common Navbar */}
       <Navbar />
 
+      {/* Common Hero */}
       <Hero />
 
-      <AboutSection />
+      {/* Branch selector + branch-specific content */}
+      <BusinessSwitcher />
 
-      <TrainingPrograms />
-
-      <PersonalTraining />
-
-      <CoachingStaff />
-
-      <Facilities />
-
+      {/* Common Sections */}
       <Gallery />
 
       <Testimonials />
 
-      <Branches />
-
       <EnquirySection />
 
+      {/* Common Footer */}
       <Footer />
     </main>
   );

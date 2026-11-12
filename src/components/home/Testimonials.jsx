@@ -85,7 +85,7 @@ export default function Testimonials() {
           </h2>
 
           <p className="mx-auto mt-7 max-w-[720px] text-[17px] leading-[1.75] text-[#5d6775] sm:text-[18px]">
-            Hear from players and families who are part of our academy
+            Hear from players and families who are part of our sports
             community.
           </p>
         </motion.div>

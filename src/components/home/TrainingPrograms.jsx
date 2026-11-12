@@ -15,55 +15,6 @@ import Link from "next/link";
 
 const branchPrograms = {
   "BRANCH 1": [
-    // {
-    //   icon: Baby,
-    //   title: "Junior Cricket Program",
-    //   age: "AGES 6–12",
-    //   description:
-    //     "A fun, foundational introduction to cricket focusing on grip, stance, coordination and the joy of the game.",
-    //   features: [
-    //     "Batting fundamentals",
-    //     "Bowling basics",
-    //     "Fielding skills",
-    //   ],
-    // },
-    // {
-    //   icon: Target,
-    //   title: "Intermediate Program",
-    //   age: "AGES 13–16",
-    //   description:
-    //     "Structured skill development refining technique, tactical understanding and competitive readiness.",
-    //   features: [
-    //     "Technique refinement",
-    //     "Match awareness",
-    //     "Competitive preparation",
-    //   ],
-    // },
-    // {
-    //   icon: Trophy,
-    //   title: "Advanced Cricket Program",
-    //   age: "AGES 17+",
-    //   description:
-    //     "High-level coaching focused on performance, match preparation and advanced cricket development.",
-    //   features: [
-    //     "Advanced technique",
-    //     "Match preparation",
-    //     "Performance development",
-    //   ],
-    // },
-    // {
-    //   icon: Dumbbell,
-    //   title: "Personal Training",
-    //   age: "ONE-TO-ONE",
-    //   description:
-    //     "Focused individual coaching designed around personal strengths, weaknesses and performance goals.",
-    //   features: [
-    //     "Personal coaching",
-    //     "Fitness development",
-    //     "Performance tracking",
-    //   ],
-    // },
-
     {
       icon: Target,
       title: "Regular Cricket Program",
@@ -94,31 +45,6 @@ const branchPrograms = {
   ],
 
   "BRANCH 2": [
-    // {
-    //   icon: Baby,
-    //   title: "Junior Cricket Program",
-    //   age: "AGES 6–12",
-    //   description:
-    //     "A structured introduction to cricket designed to build confidence, discipline and core fundamentals.",
-    //   features: [
-    //     "Batting fundamentals",
-    //     "Bowling basics",
-    //     "Game awareness",
-    //   ],
-    // },
-    // {
-    //   icon: Target,
-    //   title: "Intermediate Program",
-    //   age: "AGES 13–16",
-    //   description:
-    //     "Technique-focused training for players preparing to compete with greater consistency and confidence.",
-    //   features: [
-    //     "Skill refinement",
-    //     "Tactical awareness",
-    //     "Match readiness",
-    //   ],
-    // },
-
      {
       icon: Target,
       title: "Regular Cricket Program",
@@ -144,30 +70,6 @@ const branchPrograms = {
         "Training plans",
       ],
     },
-    // {
-    //   icon: Trophy,
-    //   title: "Advanced Cricket Program",
-    //   age: "AGES 17+",
-    //   description:
-    //     "Performance-oriented coaching for serious players looking to sharpen their competitive edge.",
-    //   features: [
-    //     "Advanced cricket",
-    //     "Match analysis",
-    //     "Performance coaching",
-    //   ],
-    // },
-    // {
-    //   icon: Dumbbell,
-    //   title: "Personal Training",
-    //   age: "ONE-TO-ONE",
-    //   description:
-    //     "Personalized one-to-one sessions built around specific technical and performance goals.",
-    //   features: [
-    //     "One-to-one coaching",
-    //     "Video analysis",
-    //     "Training plans",
-    //   ],
-    // },
   ],
 };
 
@@ -283,7 +185,7 @@ export default function TrainingPrograms() {
         </motion.div>
 
         {/* Branch switcher */}
-        <div className="mx-auto mt-8 flex w-fit border border-[#d9dde2] p-2">
+        {/* <div className="mx-auto mt-8 flex w-fit border border-[#d9dde2] p-2">
   {["BRANCH 1", "BRANCH 2"].map((branch) => {
     const active = activeBranch === branch;
 
@@ -302,7 +204,7 @@ export default function TrainingPrograms() {
       </button>
     );
   })}
-</div>
+</div> */}
 
         {/* Program grid */}
         <motion.div

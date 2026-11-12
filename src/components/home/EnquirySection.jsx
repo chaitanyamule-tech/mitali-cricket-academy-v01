@@ -137,12 +137,12 @@ const handleSubmit = async (event) => {
           <div className="gold-line mx-auto mt-5" />
 
           <h2 className="mt-8 text-[39px] font-black leading-[1.07] tracking-[-0.035em] text-[var(--navy)] sm:text-[48px] lg:text-[54px]">
-            Start Your Cricket Journey
+            Start Your Sports Journey
           </h2>
 
           <p className="mx-auto mt-7 max-w-[740px] text-[17px] leading-[1.75] text-[#5d6775] sm:text-[18px]">
-            Have a question about our programs, coaching, facilities or
-            stadium booking? Get in touch with our academy team.
+            Have a question about our programs, coaching, facilities,Arena or
+            stadium booking? Get in touch with our team.
           </p>
         </motion.div>
 
@@ -163,7 +163,7 @@ const handleSubmit = async (event) => {
             <div className="mt-5 h-[3px] w-[70px] bg-[var(--gold)]" />
 
             <h3 className="mt-7 text-[30px] font-black leading-[1.1] sm:text-[34px]">
-              Let's Talk Cricket
+              Let's Talk Sports
             </h3>
 
             <p className="mt-5 text-[15px] leading-7 text-white/70 sm:text-[16px]">
@@ -172,10 +172,16 @@ const handleSubmit = async (event) => {
             </p>
 
             <div className="mt-9 space-y-7">
-              <ContactItem
+              {/* <ContactItem
                 icon={MapPin}
                 title="VISIT US"
                 text="Chandoji Pawde Mangal Karyalay Ashtavinayak Nagar Canal Road, Nanded Bypass Rd, Taroda Kh., Tirumala Nagar, Wadi Bk., Maharashtra 431605"
+              /> */}
+
+              <ContactItem
+                icon={MapPin}
+                title="VISIT US"
+                text="Malku Dhanora, Nanded, Maharashtra, India"
               />
 
               <ContactItem

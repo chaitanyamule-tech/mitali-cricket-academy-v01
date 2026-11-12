@@ -4,7 +4,7 @@ import {
   useEffect,
   useState,
 } from "react";
-
+import useSyncExternalStore from "react";
 import BookingHeader from "@/components/booking/BookingHeader";
 import BookingProgress from "@/components/booking/BookingProgress";
 import DateStep from "@/components/booking/DateStep";

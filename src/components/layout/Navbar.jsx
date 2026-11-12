@@ -59,7 +59,7 @@ export default function Navbar() {
               <div className="flex h-[62px] w-[62px] shrink-0 items-center justify-center overflow-hidden rounded-4xl bg-[var(--gold)]">
                 <Image
                   src="/images/logo.png"
-                  alt="Mitali Cricket Academy"
+                  alt="Mitali Sports Arena"
                   width={58}
                   height={58}
                   priority
@@ -76,7 +76,7 @@ export default function Navbar() {
                     : "text-white"
                 }`}
               >
-                MITALI CRICKET ACADEMY
+                MITALI SPORTS ARENA
               </div>
 
               <div className="mt-1 text-[10px] font-bold leading-[1.35] tracking-[0.12em] text-[var(--gold)] sm:text-[11px]">

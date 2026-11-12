@@ -66,6 +66,11 @@ const facilities = [
     description: "Comfortable viewing area for parents and spectators.",
     icon: Users,
   },
+  {
+  title: "Indoor Hall",
+  description: "Spacious indoor facility for practice sessions and training activities.",
+  icon: Users,
+},
 ];
 
 function FacilityItem({ facility, index }) {

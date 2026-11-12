@@ -22,6 +22,7 @@ const filters = [
   "GROUND",
   "EVENTS",
   "STUDENTS",
+  "ARENA",
 ];
 
 const galleryItems = [
@@ -220,19 +221,20 @@ export default function Gallery() {
           className="mx-auto max-w-[850px] text-center"
         >
           <div className="gold-label">
-            GALLERY
+           OUR SPORTS GALLERY
           </div>
 
           <div className="gold-line mx-auto mt-5" />
 
           <h2 className="mt-8 text-[39px] font-black leading-[1.07] tracking-[-0.035em] text-[var(--navy)] sm:text-[48px] lg:text-[54px]">
-            Explore Our Academy
+            Moments That Inspire Us
           </h2>
 
           <p className="mx-auto mt-7 max-w-[760px] text-[17px] leading-[1.75] text-[#5d6775] sm:text-[18px]">
-            Take a look at training sessions,
-            matches, facilities and the moments
-            that make our academy special.
+            Explore the sporting moments, training sessions,
+            achievements, facilities and events that bring
+            our community together. Discover memories from
+            MITALI SPORTS ARENA.
           </p>
         </motion.div>
 
@@ -271,25 +273,34 @@ export default function Gallery() {
         </div>
 
         {/* Gallery */}
-        <motion.div
-          layout
-          className="mt-12 grid w-full grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3"
-        >
-          <AnimatePresence mode="popLayout">
-            {filteredItems.map(
-              (item, index) => (
-                <GalleryImage
-                  key={item.id}
-                  item={item}
-                  index={index}
-                  onClick={
-                    setSelectedImage
-                  }
-                />
-              )
-            )}
-          </AnimatePresence>
-        </motion.div>
+        {/* Gallery */}
+{filteredItems.length > 0 ? (
+  <motion.div
+    layout
+    className="mt-12 grid w-full grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3"
+  >
+    <AnimatePresence mode="popLayout">
+      {filteredItems.map((item, index) => (
+        <GalleryImage
+          key={item.id}
+          item={item}
+          index={index}
+          onClick={setSelectedImage}
+        />
+      ))}
+    </AnimatePresence>
+  </motion.div>
+) : (
+  <div className="mt-12 border border-[#dfe2e7] bg-white px-6 py-16 text-center">
+    <div className="gold-label">
+      ARENA GALLERY
+    </div>
+
+    <h3 className="mt-4 text-[25px] font-black text-[var(--navy)]">
+      Arena Gallery Coming Soon
+    </h3>
+  </div>
+)}
       </div>
 
       {/* Lightbox */}
